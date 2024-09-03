@@ -119,3 +119,88 @@ getApiAttendance().then(apiAttendance =>{
         console.log(apiAttendance)
         drawChart(apiAttendance.data)
 })
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getRandomColor() {
+    let randomNumber = Math.floor(Math.random() * 16777215);
+    let randomColor = "#" + randomNumber.toString(16).padStart(6, '0');
+    return randomColor;
+}
+
+function drawCake(apiData){
+    
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawCake2);
+    function drawCake2() {
+
+    
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Element'); // Columna 0: tipo string
+        data.addColumn('number', 'Density'); // Columna 1: tipo number
+        data.addColumn({type: 'string', role: 'style'});
+
+        let nivel=""
+        let pres = 0
+        let aus = 0
+        
+        apiData.forEach(element =>{
+            if (nivel == "") nivel = element.nivel
+            if( nivel == element.nivel){
+                pres += element.presentes
+                aus += element.ausentes
+                console.log(pres)
+            }
+            else {
+                data.addRows([
+                    [nivel, ((pres * 100) / (pres + aus)), getRandomColor()]
+                ]);
+                nivel = element.nivel
+                pres = element.presentes
+                aus = element.ausentes
+            }
+        })
+
+        data.addRows([
+            [nivel, ((pres * 100) / (pres + aus)), getRandomColor()]
+        ]);
+
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+                        { calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation" },
+                        2]);
+
+        var options = {
+            title: "Atendance Percentage",
+            width: 600,
+            height: 400,
+            bar: {groupWidth: "95%"},
+            legend: { position: "none" },
+        };
+        var chart = new google.visualization.BarChart(document.getElementById("circular_asisttance"));
+        chart.draw(view, options);
+
+        
+
+    }
+}
+url = "https://apidemo.geoeducacion.com.ar/api/testing/asistencia/1"
+function getApiAttendanceComparison(){
+    return new Promise((resolve, reject) => {
+        fetch(url).then(api => {
+            if (!api.ok) {
+                throw new Error('Error en la red');
+            }
+            return api.json();
+        }).then(api => {
+            resolve(api)
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+
+getApiAttendanceComparison().then(apiAttendanceComp =>{
+    drawCake(apiAttendanceComp.data)
+})

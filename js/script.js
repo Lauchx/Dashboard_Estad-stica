@@ -1,5 +1,7 @@
 
 
+    // Código para dibujar los gráficos
+
 function drawGraphic(inicial, primario, secundario) {
     google.charts.load("current", { packages: ['corechart'] })
     google.charts.setOnLoadCallback(drawChart);
@@ -22,13 +24,15 @@ function drawGraphic(inicial, primario, secundario) {
             2]);
 
         var options = {
-            title: "Cantidad de alumnos por nivel",
-            width: 600,
-            height: 400,
+            title: "Composición del alumnado por nivel.",
             bar: { groupWidth: "95%" },
             legend: { position: "none" },
+            backgroundColor: {
+                'fill': '#c4fff9',
+                'opacity': 100
+             },
         };
-        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"))
+        var chart = new google.visualization.ColumnChart(document.getElementById("students_byLevel"))
         chart.draw(view, options);
     }
 }
@@ -74,25 +78,28 @@ function drawChart(dataAttendance) {
 
     function draw() {
         var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Month');
+        data.addColumn('string', 'Month');
         data.addColumn('number', 'Attendance');
         dataAttendance.forEach(element => {
             data.addRows([
-                [element.nro_mes, element.asistencia],
+                [element.mes, element.asistencia],
             ]);
         })
 
 
         var options = {
             chart: {
-                title: 'Asistecia general',
-                subtitle: 'Marzo a Diciembre'
+                title: 'Evolución anual de nivel de asistencia por mes.',
+                subtitle: 'De Marzo a Diciembre',
+                backgroundColor: '#c4fff9',
             },
-            width: 900,
-            height: 500
+            backgroundColor: {
+                'fill': '#c4fff9',
+                'opacity': 100,
+             },
         };
 
-        var chart = new google.charts.Line(document.getElementById('asisttance'));
+        var chart = new google.charts.Line(document.getElementById('Anual_attendance_byLevels'));
 
         chart.draw(data, google.charts.Line.convertOptions(options));
     }
@@ -150,7 +157,6 @@ function drawCake(apiData) {
             if (nivel == element.nivel) {
                 pres += element.presentes
                 aus += element.ausentes
-                console.log(pres)
             }
             else {
                 data.addRows([
@@ -177,13 +183,15 @@ function drawCake(apiData) {
             2]);
 
         var options = {
-            title: "Atendance Percentage",
-            width: 600,
-            height: 400,
+            title: "Porcentaje de asistencia por niveles.",
             bar: { groupWidth: "95%" },
             legend: { position: "none" },
+            backgroundColor: {
+                'fill': '#c4fff9',
+                'opacity': 100
+             },
         };
-        var chart = new google.visualization.BarChart(document.getElementById("circular_asisttance"));
+        var chart = new google.visualization.BarChart(document.getElementById("Atendance_levels"));
         chart.draw(view, options);
 
 
@@ -225,7 +233,7 @@ function drawPie(apiAttendanceComp) {
 
     google.charts.load("current", { packages: ["corechart"] });
     google.charts.setOnLoadCallback(drawChartPie);
-    function drawChartPie(apiCalificationsData) {
+    function drawChartPie() {
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
             ['Aprobados', (apro / cont)],
@@ -233,11 +241,15 @@ function drawPie(apiAttendanceComp) {
         ]);
 
         var options = {
-            title: 'Nivel general de calificaciones en la institucións',
+            title: 'Nivel general de calificaciones en la institución.',
             pieHole: 0.4,
+            backgroundColor: {
+                'fill': '#c4fff9',
+                'opacity': 100
+             },
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        var chart = new google.visualization.PieChart(document.getElementById('general_calcifications'));
         chart.draw(data, options);
     }
 }
@@ -257,12 +269,12 @@ function getApiCalificatons() {
     })
 }
 
-getApiCalificatons().then(apiCalifications => {
-    drawPie(apiCalifications.data)
-    drawChartLevel(apiCalifications.data)
+getApiCalificatons().then(apiRatings => {
+    drawPie(apiRatings.data)
+    drawChartLevel(apiRatings.data)
 })
 /////////////////////////////////////////
-function drawChartLevel(apiCalifications) {
+function drawChartLevel(apiRatings) {
     google.charts.load("current", { packages: ["corechart"] });
     google.charts.setOnLoadCallback(drawChartLevel2);
 
@@ -273,7 +285,7 @@ function drawChartLevel(apiCalifications) {
         data.addColumn('number', 'Density'); // Columna 1: tipo number
         data.addColumn({ type: 'string', role: 'style' });
         
-        apiCalifications.forEach(element =>{
+        apiRatings.forEach(element =>{
             data.addRow([(element.curso + " " + element.nivel),  element.aprobados, getRandomColor()])
         })
         var view = new google.visualization.DataView(data);
@@ -287,13 +299,15 @@ function drawChartLevel(apiCalifications) {
             2]);
 
         var options = {
-            title: "Density of Precious Metals, in g/cm^3",
-            width: 600,
-            height: 400,
+            title: "Comparativa de niveles de calificaciones por curso.",
             bar: { groupWidth: "95%" },
             legend: { position: "none" },
+            backgroundColor: {
+                'fill': '#c4fff9',
+                'opacity': 100
+             },
         };
-        var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+        var chart = new google.visualization.BarChart(document.getElementById("compare_ratings_byCourse"));
         chart.draw(view, options);
     }
 }
@@ -315,17 +329,19 @@ function asistenciaGeneral(api){
         ]);
 
         var options = {
-          width: 400, height: 120,
           redFrom: 90, redTo: 100,
           yellowFrom:75, yellowTo: 90,
-          minorTicks: 5
+          minorTicks: 5,
+          backgroundColor: {
+            'fill': '#c4fff9',
+            'opacity': 100
+         },
         };
+        
 
-        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+        var chart = new google.visualization.Gauge(document.getElementById('General_asisttance'));
 
         chart.draw(data, options);
-
-
       }
     }
 /////////////////////////////////////
@@ -336,17 +352,21 @@ function drawEstado(api){
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
           ['Total', api[0].total],
-          ['Entregados', api[0].entregados],
+          ['Error', api[0].error],
           ['Pendientes',  api[0].pendientes],
-          ['Error', api[0].error]
+          ['Entregados', api[0].entregados],
         ]);
 
         var options = {
-          title: 'Estado',
+          title: 'Estado de comunicados.',
           is3D: true,
+          backgroundColor: {
+            'fill': '#c4fff9',
+            'opacity': 100
+         },
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        var chart = new google.visualization.PieChart(document.getElementById('status_communications'));
         chart.draw(data, options);
       }
     }
@@ -369,3 +389,4 @@ function drawEstado(api){
     getApiComunicados().then(apiEstado => {
         drawEstado(apiEstado.data)
     })
+

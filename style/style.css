@@ -1,14 +1,20 @@
-body{
+html,body{
+    height: 100%;
+    margin: 0;
     background: #1c2541;
+    color: white;
 }
 ul{
-    margin: 5px;
+    justify-content: center;
+    height: 100%;
 }
 li{
-    margin: 140px;
+    padding: 140px;
+   
 }
 aside{
     float: left;
+    background: #3a506b;
 }
 section{
     float: none;

@@ -1,6 +1,4 @@
-
-
-    // Código para dibujar los gráficos
+  // Código para dibujar los gráficos
 
 function drawGraphic(inicial, primario, secundario) {
     google.charts.load("current", { packages: ['corechart'] })
@@ -8,9 +6,9 @@ function drawGraphic(inicial, primario, secundario) {
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ["Alumnos", "Cantidad", { role: "style" }],
-            ["Inicial", inicial, "#fefee3"],
-            ["Primario", primario, "#ffc9b9"],
-            ["Secundario", secundario, "#d68c45"],
+            ["Inicial", inicial, colors[2]],
+            ["Primario", primario, colors[0]],
+            ["Secundario", secundario, colors[1]],
         ]);
 
         var view = new google.visualization.DataView(data);
@@ -135,6 +133,7 @@ function getRandomColor() {
     let randomColor = "#" + randomNumber.toString(16).padStart(6, '0');
     return randomColor;
 }
+const  colors = [getRandomColor(), getRandomColor(), getRandomColor()]
 
 function drawCake(apiData) {
 
@@ -151,7 +150,7 @@ function drawCake(apiData) {
         let nivel = ""
         let pres = 0
         let aus = 0
-
+        let count = 0;
         apiData.forEach(element => {
             if (nivel == "") nivel = element.nivel
             if (nivel == element.nivel) {
@@ -160,16 +159,16 @@ function drawCake(apiData) {
             }
             else {
                 data.addRows([
-                    [nivel, ((pres * 100) / (pres + aus)), getRandomColor()]
+                    [nivel, ((pres * 100) / (pres + aus)), colors[count]]
                 ]);
                 nivel = element.nivel
                 pres = element.presentes
                 aus = element.ausentes
+                count++
             }
         })
-
         data.addRows([
-            [nivel, ((pres * 100) / (pres + aus)), getRandomColor()]
+            [nivel, ((pres * 100) / (pres + aus)), colors[count]]
         ]);
 
         var view = new google.visualization.DataView(data);

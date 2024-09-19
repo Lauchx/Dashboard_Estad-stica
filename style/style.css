@@ -1,80 +1,114 @@
-html,body{
+html,
+body {
     height: 100%;
     margin: 0;
     background: #1c2541;
     color: white;
 }
-ul{
+
+ul {
     justify-content: center;
     height: 100%;
 }
-li{
-    padding: 140px;
-   
+
+li {
+    padding: 100px;
+
 }
-aside{
+
+aside {
     float: left;
     background: #3a506b;
+    box-shadow: 5px -30px 100px black;
+    height: 96vh;
 }
-section{
+
+section {
     float: none;
     display: flex;
     flex-direction: row;
 }
-.generalDiv{
+
+footer {
+    box-shadow: 300px 0px 10px #030520;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    height: 4%;
+    width: 100%;
+    background: #030520;
+}
+
+footer>a {
+    float: right;
+}
+
+.generalDiv {
     display: flex;
     flex-flow: row wrap;
     padding: 15px;
     margin: 15px;
-    max-height: 200px;
-    min-height: 200px;
     justify-content: space-around;
 }
-.generalAsisttance, .AtendanceLevels, .AnualAttendanceByLevels, .studentsByLevel, 
-.generalCalcifications, .compareRatingsByCourse, .statusCommunications{
+
+.generalAsisttance,
+.AtendanceLevels,
+.AnualAttendanceByLevels,
+.studentsByLevel,
+.generalCalcifications,
+.compareRatingsByCourse,
+.statusCommunications {
     background: #c4fff9;
     padding: 10px;
     border: 1px solid #ddd;
-    height: 400px;
+    box-shadow: 200px 200px 2000px black;
     margin: 20px;
     border-radius: 10px 10px;
 }
-.generalAsisttance{
-    width: 300px ;
+
+.generalAsisttance {
+
     display: flex;
-   justify-content: center;
-   align-content: center;
+    justify-content: center;
+    align-content: center;
 }
-.AtendanceLevels{
-    width: 600px ;
-    display: flex;
-    align-content: stretch;
-}
-.AnualAttendanceByLevels{
-    width: 700px ;
-    display: flex;
-    align-content: stretch;
-    
-}
-.studentsByLevel{
-    width: 600px ;
+
+.AtendanceLevels {
+
     display: flex;
     align-content: stretch;
 }
-.generalCalcifications{
-    width: 500px ;
+
+.AnualAttendanceByLevels {
+    width: 600px;
+
+    display: flex;
+    align-content: stretch;
+
+}
+
+.studentsByLevel {
+
     display: flex;
     align-content: stretch;
 }
-.compareRatingsByCourse{
-    width: 600px ;
+
+.generalCalcifications {
+
+    display: flex;
+    align-content: stretch;
+}
+
+.compareRatingsByCourse {
+
     padding: 10px;
     display: flex;
     align-content: stretch;
 }
-.statusCommunications{
-    width: 1000px ;
+
+.statusCommunications {
+
     display: flex;
     align-content: stretch;
-   
+
 }

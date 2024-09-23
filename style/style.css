@@ -67,48 +67,134 @@ footer>a {
 }
 
 .generalAsisttance {
-
     display: flex;
     justify-content: center;
     align-content: center;
+    position: relative;
+    width: 150px;
+    height: 150px; 
+    transition: all 0.5s ease;
+    overflow: hidden;
+    align-items: center;
+    
 }
+
+.newDiv {
+    opacity: 0; 
+    visibility: hidden; 
+    background: rgba(1, 255, 170, 0.747);
+    color: white;
+    padding: 20px;
+    position: relative; 
+    margin-top: 20px;
+    transition: opacity 0.5s ease, visibility 0.5s ease; 
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgb(0, 255, 255);
+    border: 1px solid #ddd;
+    width: 200px;
+}
+
+.generalAsisttance:hover + #Ga {
+    opacity: 1; /* Aparece suavemente */
+    visibility: visible; /* Hace visible el div */
+}
+.generalAsisttance:hover  {
+    transition: all .5s;
+    transform: scale(1.10);
+}
+
 
 .AtendanceLevels {
 
     display: flex;
     align-content: stretch;
+    width: 300px;
+    height: 200px; 
 }
+.AtendanceLevels:hover + #Al {
+    opacity: 1; /* Aparece suavemente */
+    visibility: visible; /* Hace visible el div */
+}
+.AtendanceLevels:hover  {
+    transition: all .5s;
+    transform: scale(1.10);
+}
+
+
 
 .AnualAttendanceByLevels {
     width: 600px;
-
+    height: 300px;  
     display: flex;
     align-content: stretch;
 
+}
+.AnualAttendanceByLevels:hover + #Aab {
+    opacity: 1; /* Aparece suavemente */
+    visibility: visible; /* Hace visible el div */
+}
+.AnualAttendanceByLevels:hover  {
+    transition: all .5s;
+    transform: scale(1.10);
 }
 
 .studentsByLevel {
-
+    height: 200px;
     display: flex;
     align-content: stretch;
+}
+.studentsByLevel:hover + #Sb {
+    opacity: 1; /* Aparece suavemente */
+    visibility: visible; /* Hace visible el div */
+}
+.studentsByLevel:hover {
+    transition: all .5s;
+    transform: scale(1.10);
 }
 
 .generalCalcifications {
-
+    height: 200px;
     display: flex;
     align-content: stretch;
 }
+.generalCalcifications:hover + #Gc {
+    opacity: 1; /* Aparece suavemente */
+    visibility: visible; /* Hace visible el div */
+}
+.generalCalcifications:hover  {
+    transition: all .5s;
+    transform: scale(1.10);
+}
 
 .compareRatingsByCourse {
-
+    height: 200px;
+    width: 400px;
     padding: 10px;
     display: flex;
     align-content: stretch;
 }
+.compareRatingsByCourse:hover + #Crb {
+    opacity: 1; /* Aparece suavemente */
+    visibility: visible; /* Hace visible el div */
+}
+.compareRatingsByCourse:hover  {
+    transition: all .5s;
+    transform: scale(1.10);
+}
 
 .statusCommunications {
-
+    height: 200px;
     display: flex;
     align-content: stretch;
 
 }
+.statusCommunications:hover + #Sc {
+    opacity: 1; /* Aparece suavemente */
+    visibility: visible; /* Hace visible el div */
+}
+.statusCommunications:hover  {
+    transition: all .5s;
+    transform: scale(1.10);
+}
+
+
